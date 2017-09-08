@@ -1,5 +1,5 @@
-# film-PHP
-An App for Notes
+# Film-PHP
+an webside for your movies
 
 passwd		test
 e-mail		test@test.ch

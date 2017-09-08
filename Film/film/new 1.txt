@@ -1,0 +1,12 @@
+$filmID =$_GET('filmID');
+
+require_once 'header.php';
+if (isset($filmID)){
+	require_once 'detile.php';
+} else {
+	require_once 'filmalg.php'
+}
+
+if (isset($_GET['filmID'])){
+
+}

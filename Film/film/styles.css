@@ -1,0 +1,157 @@
+/*gross*/
+@media screen and (min-width:1001px){
+.center{
+	margin-left: 250px;
+	text-decoration: none;
+	max-width: 500px;
+}
+.left{
+	position: fixed;
+	margin-left: 30px;
+	text-align: left;
+	text-decoration:none;
+}
+.right{
+	position: fixed;
+	margin-left: 790px;
+	display: block;
+	text-align: right;
+	list-style-type: none;
+	color: black;
+}
+li a {
+	text-decoration:none;
+}
+.video1{
+	width: 500px;
+	height: 400px;
+	padding-bottom: 15px;
+	margin-left: -30px;
+}
+.new{
+	margin-left: 0;
+}
+.center2{
+	margin-left: 200px;
+}
+nav {
+	color: rgb(0,0,0);
+}
+/*Filmdetile*/
+.video2{
+	width: 600px;
+	height: 400px;
+	margin-left: -90px;
+}
+.body2{
+	background-color: rgba(255,255,255,0.7);
+	margin-top: 150px;
+	min-height: 450px;
+}
+.ruck{
+	margin-left: 300px;
+}
+}
+/*mitte*/
+@media screen and (max-width:1000px){
+	
+@media screen and (min-width:701px){
+.center{
+	text-decoration: none;
+	max-width: 500px;
+	margin-top: -400px;
+}
+.left{
+	margin-right: 100px;
+	text-decoration:none;
+	clear: bottom;
+	text-align: right;
+}
+.right{
+	margin-right: 100px;
+	display: block;
+	text-align: right;
+	list-style-type: none;
+	color: black;
+	clear: bottom;
+}
+.video1{
+	width: 220px;
+	height: 240px;
+	padding-bottom: 15px;
+}
+/*Filmdetile*/
+.video2{
+	width: 450px;
+	height: 250px;
+	margin-left: 0px;
+}
+.body2{
+	background-color: rgba(255,255,255,0.7);
+	margin-top: 50px;
+	min-height: 600px
+}
+.ruck{
+	margin-left: 200px;
+}
+}
+}
+/*klein*/
+@media screen and (max-width:700px){
+.center{
+	text-decoration:none;
+}
+.left{
+	text-decoration:none;
+}
+.right{
+	text-decoration:none;
+}
+.video1{
+	width: 220px;
+	height: 240px;
+	padding-bottom: 15px;
+}
+/*Filmdetile*/
+.video2{
+	width: 300px;
+	height: 200px;
+}
+.body2{
+	background-color: rgba(255,255,255,0.7);
+	margin-top: 50px;
+}
+.ruck{
+	margin-left: 100px;
+}
+}
+
+/*all*/
+.clear{
+	text-decoration: none;
+}
+.loeschen{
+	list-style-type: none;
+	text-decoration: none;
+	color: #000000;
+}
+/*Filmdetile*/
+/*filmsuche*/
+/*login / Registrier*/
+.table{
+	text-align: left;
+}
+a {
+	color: black;
+}
+.body1{
+	background: url(bilder/film.png) no-repeat fixed 0 0 / cover;
+}
+body > div{
+	max-width: 1040px;
+	margin: 0 auto;
+	/*background: rgba(255,255,255,0.7);*/
+}
+.body2{
+	background-color: rgba(255,255,255,0.7);
+}

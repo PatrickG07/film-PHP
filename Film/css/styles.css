@@ -1,0 +1,38 @@
+/*algemein*/
+.body1{
+	background: url(bilder/film2.jpg) no-repeat fixed 0 0 / cover;
+}
+@media screen and (min-width:731px){
+.center{
+	text-align: center;
+	margin-top: -100px;
+	text-decoration:none;
+}
+.left{
+	text-align: left;
+	clear: bottom;
+	margin-top: -200px;
+	text-decoration:none;
+}
+.right{
+	display: block;
+	text-align: right;
+	clear: bottom;
+	text-decoration:none;
+}
+
+}
+
+@media screen and (max-width:730px){
+
+.center{
+	text-decoration:none;
+}
+.left{
+	text-decoration:none;
+}
+.right{
+	text-decoration:none;
+}
+
+}

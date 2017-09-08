@@ -1,0 +1,147 @@
+<?php 
+session_start();
+$pdo = new PDO('mysql:host=localhost;dbname=film', 'root', '');
+?>
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+		<link href="styles.css" rel="stylesheet">
+        <title>Instant Update Database Project by WebinAction.co.uk</title>        
+    </head>
+    <body class="body1">
+		<div class="body2">
+			<header>
+				<h1 class="center2">LOGIN</h1>
+			</header>
+			<nav class="right">
+				<div>
+					<h2>Navigation <br>und user</h2>
+				</div>
+				<ul class="loeschen">
+					<li><a href="index.html">Haubtseite</a></li>
+					<li><a href="filmsuche.html">Filmsuchen</a></li>
+					<li><a href="login.html">Login</a></li>
+					<li><a href="logout.html">Logout</a></li>
+				</ul>
+				<ul class="loeschen">
+					<li><a href="user.html">user</a></li>
+					<li><a href="#">List of other users</a></li>
+					<li><a href="#">List of other users</a></li>   
+				</ul>
+				<ul class="loeschen">
+					<li><a href="manage.html">Manage users</a></li>
+					<li><a href="manage2.html">Manage movies</a></li>
+				</ul>
+			</nav>
+			<nav class="left">
+				<h2>Favorites</h2>
+				<ul class="loeschen">
+					<li><a href="#">Movie Title</a></li>
+					<li><a href="#">Movie Title</a></li>
+					<li><a href="#">Movie Title</a></li>
+				</ul>
+			</nav>
+			<section class="center">
+				<h2>Login</h2>
+				<p>Loggen Sie sich ein</p>
+				<?php
+				$showFormular = true; //Variable ob das Registrierungsformular anezeigt werden soll
+				 
+				if(isset($_GET['register'])) {
+					$error = false;
+					$benutzername = $_POST['benutzername'];
+					$passwort = $_POST['passwort'];
+					$passwort2 = $_POST['passwort2'];
+				  
+					if(!filter_var($benutzername, FILTER_VALIDATE_EMAIL)) {
+						echo 'Bitte eine gültiger benutzername eingeben<br>';
+						$error = true;
+					} 	
+					if(strlen($passwort) == 0) {
+						echo 'Bitte ein Passwort angeben<br>';
+						$error = true;
+					}
+					if($passwort != $passwort2) {
+						echo 'Die Passwörter müssen übereinstimmen<br>';
+						$error = true;
+					}
+					
+					//Überprüfe, dass die E-Mail-Adresse noch nicht registriert wurde
+					if(!$error) { 
+						$statement = $pdo->prepare("SELECT * FROM tbluser WHERE benutzername = :benutzername");
+						$result = $statement->execute(array('benutzername' => $benutzername));
+						$user = $statement->fetch();
+						
+						if($user !== false) {
+							echo 'Diese E-Mail-Adresse ist bereits vergeben<br>';
+							$error = true;
+						}	
+					}
+					
+					//Keine Fehler, wir können den Nutzer registrieren
+					if(!$error) {	
+						$passwort_hash = password_hash($passwort, PASSWORD_DEFAULT);
+						
+						$statement = $pdo->prepare("INSERT INTO users (benutzername, passwort) VALUES (:benutzername, :passwort)");
+						$result = $statement->execute(array('benutzername' => $benutzername, 'passwort' => $passwort_hash));
+						
+						if($result) {		
+							echo 'Du wurdest erfolgreich registriert. <a href="login.php">Zum Login</a>';
+							$showFormular = false;
+						} else {
+							echo 'Beim Abspeichern ist leider ein Fehler aufgetreten<br>';
+						}
+					} 
+				}
+				 
+				if($showFormular) {
+				?>
+				 
+				<form action="?register=1" method="post">
+				E-Mail:<br>
+				<input type="email" size="40" maxlength="250" name="email"><br><br>
+				 
+				Dein Passwort:<br>
+				<input type="password" size="40"  maxlength="250" name="passwort"><br>
+				 
+				Passwort wiederholen:<br>
+				<input type="password" size="40" maxlength="250" name="passwort2"><br><br>
+				 
+				<input type="submit" value="Abschicken">
+				</form>
+				 
+				<?php
+				} //Ende von if($showFormular)
+				?>
+				
+				
+				<!--<form>
+					<table style="width:100%" class="table">
+						<tr>
+							<th>Ihr Benutername:</th>
+							<th><input type="text" id="benutzername" class="textbox" required><br></th>
+						</tr>
+						<tr>
+							<th>Ihre E-Mail-Adresse:</th>
+							<th><input type="email" id="besuchermail" class="textbox" required><br></th>
+						</tr>
+						<tr>
+							<th>Ihr Passwort:</th>
+							<th><input type="password" id="passwort1" class="textbox" required><br></th>
+						</tr>
+						<tr>
+							<th>Ihr Passwort noch einmal:</th>
+							<th><input type="password" id="passwrot2" class="textbox" required><br></th>
+						</tr>
+					</table>
+					<input type="submit" value="Bestätigen"><br>
+				</form>-->
+			</section>
+			<footer>
+				<p class="center2">&copy; 2015 by Patrick Gartenmann <!--Instant update database project by <a href="mailto:felixgruener@hotmail.com">felix gruener--></a></p>
+			</footer>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,86 @@
+<?php 
+session_start();
+$pdo = new PDO('mysql:host=localhost;dbname=film', 'root', '');
+ 
+if(isset($_GET['login'])) {
+	$benutzername = $_POST['benutzername'];
+	$passwort = $_POST['passwort'];
+	
+	$statement = $pdo->prepare("SELECT * FROM tbluser WHERE benutzername = :benutzername");
+	$result = $statement->execute(array('benutzername' => $benutzername));
+	$user = $statement->fetch();
+		
+	//Überprüfung des Passworts
+	if ($user !== false && password_verify($passwort, $user['passwort'])) {
+		$_SESSION['userid'] = $user['id'];
+		die('Login erfolgreich. Weiter zu <a href="user.html">internen Bereich</a>');
+	} else {
+		$errorMessage = "benutzername oder Passwort war ungültig<br>";
+	}
+}
+?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+		<link href="styles.css" rel="stylesheet">
+        <title>Instant Update Database Project by WebinAction.co.uk</title>        
+    </head>
+    <body class="body1">
+		<div class="body2">
+			<header>
+				<h1 class="center2">LOGIN</h1>
+			</header>
+			<nav class="right">
+				<div>
+					<h2>Navigation <br>und user</h2>
+				</div>
+				<ul class="loeschen">
+					<li><a href="index.html">Haubtseite</a></li>
+					<li><a href="filmsuche.html">Filmsuchen</a></li>
+					<li><a href="login.html">Login</a></li>
+					<li><a href="logout.html">Logout</a></li>
+				</ul>
+				<ul class="loeschen">
+					<li><a href="user.html">user</a></li>
+					<li><a href="#">List of other users</a></li>
+					<li><a href="#">List of other users</a></li>   
+				</ul>
+				<ul class="loeschen">
+					<li><a href="manage.html">Manage users</a></li>
+					<li><a href="manage2.html">Manage movies</a></li>
+				</ul>
+			</nav>
+			<nav class="left">
+				<h2>Favorites</h2>
+				<ul class="loeschen">
+					<li><a href="#">Movie Title</a></li>
+					<li><a href="#">Movie Title</a></li>
+					<li><a href="#">Movie Title</a></li>
+				</ul>
+			</nav>
+			<section class="center">
+				<h2>Login</h2>
+				<p>Loggen Sie sich ein</p>
+				
+				<?php 
+				if(isset($errorMessage)) {
+					echo $errorMessage;
+				}
+				?>
+				<form action="?login=1" method="post">
+					Benutzername:<br>
+					<input type="benutzername" size="40" maxlength="250" name="benutzername"><br><br>
+					 
+					Dein Passwort:<br>
+					<input type="password" size="40"  maxlength="250" name="passwort"><br>
+					 
+					<input type="submit" value="Abschicken">
+				</form> 
+			</section>
+			<footer>
+				<p class="center2">&copy; 2015 by Patrick Gartenmann <!--Instant update database project by <a href="mailto:felixgruener@hotmail.com">felix gruener--></a></p>
+			</footer>
+        </div>
+    </body>
+</html>
